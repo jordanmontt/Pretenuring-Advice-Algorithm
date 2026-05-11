@@ -16,7 +16,7 @@ PretenuringAdviceAlgorithmTest >> setUp [
 
 	super setUp.
 
-	classificator := PretenuringAdviceAlgorithm new
+	classificator := MerlinPretenuringAdviceAlgorithm new
 ]
 
 { #category : 'tests' }
@@ -63,7 +63,7 @@ PretenuringAdviceAlgorithmTest >> testIsObjectImmortal [
 	self assert: (classificator isObjectImmortal: illEphe).
 	
 	"Strange case"
-	classificator := PretenuringAdviceAlgorithm new
+	classificator := MerlinPretenuringAdviceAlgorithm new
 		startTime: 0;
 		endTime: 17;
 		yourself.

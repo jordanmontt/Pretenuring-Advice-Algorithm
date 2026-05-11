@@ -9,7 +9,7 @@ The algorithm works as follows:
 4. (Optional) Return the allocations that are long or lived
 "
 Class {
-	#name : 'PretenuringAdviceAlgorithm',
+	#name : 'MerlinPretenuringAdviceAlgorithm',
 	#superclass : 'Object',
 	#instVars : [
 		'maxLiveSize',
@@ -27,13 +27,13 @@ Class {
 }
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> allocationGraph: anAllocationGraph [
+MerlinPretenuringAdviceAlgorithm >> allocationGraph: anAllocationGraph [
 
 	allocationGraph := anAllocationGraph
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> binObjects [
+MerlinPretenuringAdviceAlgorithm >> binObjects [
 
 	groupedAllocationSites keysDo: [ :allocationGraphComponent |
 		allocationGraphComponent allocatedSamples do: [ :illEphe |
@@ -50,7 +50,7 @@ PretenuringAdviceAlgorithm >> binObjects [
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> calculateMaxLiveSize [
+MerlinPretenuringAdviceAlgorithm >> calculateMaxLiveSize [
 
     | currentTime aliveObjectsSize allocatedSamples deathObjects |
     maxLiveSize := 0.
@@ -75,7 +75,7 @@ PretenuringAdviceAlgorithm >> calculateMaxLiveSize [
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> classifyAllocationSites [
+MerlinPretenuringAdviceAlgorithm >> classifyAllocationSites [
 
 	groupedAllocationSites keysAndValuesDo: [ :allocationGraphComponent :allocationSiteBin |
 		| is ss ls wasClassified |
@@ -98,7 +98,7 @@ PretenuringAdviceAlgorithm >> classifyAllocationSites [
 ]
 
 { #category : 'api' }
-PretenuringAdviceAlgorithm >> classifyEdgesByLifetime [
+MerlinPretenuringAdviceAlgorithm >> classifyEdgesByLifetime [
 
 	self binObjects.
 	self pruneAllocationSites.
@@ -106,18 +106,18 @@ PretenuringAdviceAlgorithm >> classifyEdgesByLifetime [
 ]
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> endTime: anInteger [
+MerlinPretenuringAdviceAlgorithm >> endTime: anInteger [
 
 	endTime := anInteger
 ]
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> groupedAllocationSites [
+MerlinPretenuringAdviceAlgorithm >> groupedAllocationSites [
 	^ groupedAllocationSites
 ]
 
 { #category : 'initialization' }
-PretenuringAdviceAlgorithm >> initialize [
+MerlinPretenuringAdviceAlgorithm >> initialize [
 
 	super initialize.
 
@@ -127,7 +127,7 @@ PretenuringAdviceAlgorithm >> initialize [
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> isObjectImmortal: illEphe [
+MerlinPretenuringAdviceAlgorithm >> isObjectImmortal: illEphe [
 
 	| timeOfDeath halfwayBirthtimeToEnd birthTime |
 	timeOfDeath := illEphe finalizationTime min: endTime.
@@ -137,7 +137,7 @@ PretenuringAdviceAlgorithm >> isObjectImmortal: illEphe [
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> isObjectShortLived: illEphe [
+MerlinPretenuringAdviceAlgorithm >> isObjectShortLived: illEphe [
 
 	| age |
 	age := illEphe lifetime / self maxLiveSize.
@@ -145,19 +145,19 @@ PretenuringAdviceAlgorithm >> isObjectShortLived: illEphe [
 ]
 
 { #category : 'api' }
-PretenuringAdviceAlgorithm >> longLivedAllocationSites [
+MerlinPretenuringAdviceAlgorithm >> longLivedAllocationSites [
 
     ^ groupedAllocationSites select: #isLongOrImmortal
 ]
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> maxLiveSize [
+MerlinPretenuringAdviceAlgorithm >> maxLiveSize [
 
 	^ maxLiveSize ifNil: [ self calculateMaxLiveSize ]
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> pruneAllocationSites [
+MerlinPretenuringAdviceAlgorithm >> pruneAllocationSites [
 
 	| totalProgramAllocations sitesWithSignificantSize |
 	totalProgramAllocations := allocationGraph allocatedSamples size.
@@ -167,13 +167,13 @@ PretenuringAdviceAlgorithm >> pruneAllocationSites [
 ]
 
 { #category : 'calculating' }
-PretenuringAdviceAlgorithm >> pruningThreshold [
+MerlinPretenuringAdviceAlgorithm >> pruningThreshold [
 
 	^ 0.000002
 ]
 
 { #category : 'api' }
-PretenuringAdviceAlgorithm >> setUpForAllocationGraph: anAllocationGraph [
+MerlinPretenuringAdviceAlgorithm >> setUpForAllocationGraph: anAllocationGraph [
 
     allocationGraph := anAllocationGraph.
 
@@ -185,19 +185,19 @@ PretenuringAdviceAlgorithm >> setUpForAllocationGraph: anAllocationGraph [
 ]
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> startTime [
+MerlinPretenuringAdviceAlgorithm >> startTime [
 
 	^ startTime
 ]
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> startTime: anInteger [
+MerlinPretenuringAdviceAlgorithm >> startTime: anInteger [
 
 	startTime := anInteger
 ]
 
 { #category : 'accessing' }
-PretenuringAdviceAlgorithm >> totalTime [
+MerlinPretenuringAdviceAlgorithm >> totalTime [
 
 	^ endTime - startTime
 ]
