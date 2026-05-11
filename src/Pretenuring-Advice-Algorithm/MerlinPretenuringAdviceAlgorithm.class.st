@@ -32,6 +32,12 @@ MerlinPretenuringAdviceAlgorithm >> allocationGraph: anAllocationGraph [
 	allocationGraph := anAllocationGraph
 ]
 
+{ #category : 'initialization' }
+MerlinPretenuringAdviceAlgorithm >> ambiguityThreshold: aNumber [
+
+	
+]
+
 { #category : 'calculating' }
 MerlinPretenuringAdviceAlgorithm >> binObjects [
 

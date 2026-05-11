@@ -25,7 +25,7 @@ PathSensitivePretenuringAdviceAlgorithm >> classifyAllocationSites [
 		ss := allocationSiteBin shortLivedObjects sum: #sizeInBytes.
 		ls := allocationSiteBin longLivedObjects sum: #sizeInBytes.
 
-		(is + ls) > ((is + ss + ls) * (1 - ambiguityThreshold)) ifTrue: [
+		(is + ls) > ((is + ss + ls) * ambiguityThreshold) ifTrue: [
 			allocationSiteBin classification: #long.
 			allocationGraphEdge beLongLived.
 			wasClassified := true ].
@@ -38,5 +38,5 @@ PathSensitivePretenuringAdviceAlgorithm >> classifyAllocationSites [
 PathSensitivePretenuringAdviceAlgorithm >> initialize [
 
 	super initialize.
-	ambiguityThreshold := 0.1
+	ambiguityThreshold := 0.9
 ]
