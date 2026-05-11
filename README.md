@@ -1,5 +1,7 @@
 # Pretenuring-Advice-Algorithm
 
+> This repository has been archived. It has been integrated in the [Path Sensitive Pretenuring](github.com/jordanmontt/path-sensitive-pretenuring) project.
+
 Implementation of Blackburn’s *Pretenuring Advice* algorithm for Pharo.
 
 ## Overview
